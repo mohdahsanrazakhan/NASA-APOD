@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="NASA APOD" />
+  <link rel="manifest" href="/images/site.webmanifest" />
+  <title>NASA - APOD (Astronomy Picture of the Day)</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-8">
+  <h1 class="text-3xl font-bold mb-6 text-center">NASA Astronomy Picture of the Day</h1>
+  <div class="flex space-x-4 md-6">
+    <input type="date" id="dateInput" class="p-2 rounded text-black" />
+    <button id="fetchButton" class="bg-blue-600 hover:bg-blue-700 text-white fornt-semibold px-4 py-2 rounded">Fetch
+      APOD</button>
+  </div>
+
+  <div id="skeletonLoader" class="max-w-2xl w-full bg-gray-800 rounded-2xl shadow-lg p-6 mt-12">
+    <div class="w-2/3 h-6 bg-gray-300 rounded mb-4 animate-pulse"></div>
+    <div class="w-1/4 h-4 bg-gray-300 rounded mb-6 animate-pulse"></div>
+    <div class="w-full h-48 bg-gray-300 rounded mb-4 animate-pulse"></div>
+    <div class="w-full h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+    <div class="w-full h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+    <div class="w-3/4 h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+    <div class="w-2/3 h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+  </div>
+
+  <div id="apodContainer" class="max-w-2xl bg-gray-800 rounded-2xl shadow-lg p-6 mt-12 hidden">
+    <h2 id="apodTitle" class="text-xl font-semibold"></h2>
+    <p id="apodDate" class="text-sm text-gray-400 mt-2"></p>
+    <div id="apodMedia" class="mt-4"></div>
+    <p id="apodExplanation" class="mt-4 text-gray-400"></p>
+  </div>
+
+  <script src="app.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener("load", () => {
+        // Register the service worker with the correct path (assuming it's in the dist folder)
+        navigator.serviceWorker.register("/dist/sw.js")
+          .then(registration => {
+            console.log('Service Worker registered with scope: ', registration.scope);
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed: ', error);
+          });
+      });
+    }
+  </script>
+
+</body>
+
+</html>
