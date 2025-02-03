@@ -1,6 +1,7 @@
 {
   "name": "NASA APOD",
   "short_name": "APOD",
+  "descrption": "NASA - APOD Astronomy Picture of the Day",
   "icons": [
     {
       "src": "/images/web-app-manifest-192x192.png",
